@@ -20,6 +20,11 @@ public slots:
      */
     void signUp();
 
+    /**
+     * @brief Navigates back to the login window.
+     */
+    void back();
+
 private:
     Ui::SignUpWindow *ui;
 };

@@ -1,7 +1,7 @@
 #ifndef ADVANCED_CPP_BHCC_CATEGORY_H
 #define ADVANCED_CPP_BHCC_CATEGORY_H
 
-#include <iostream>
+#include <QString>
 
 /**
  * @brief Category entity.
@@ -9,27 +9,32 @@
 class Category {
 public:
     /**
-     * Creates a category.
+     * @brief Creates a category.
      * @param id The ID of this category.
      * @param name The name of this category.
      */
-    Category(unsigned int id, std::string_view name);
+    Category(unsigned int id, unsigned int userId, const QString& name);
 
     /**
-     * Returns the ID of this category.
-     * @return the ID of this category.
+     * @brief Returns the ID of this category.
      */
     [[nodiscard]] unsigned int getId() const;
+
+    /**
+     * @brief Returns the ID of the user who creates this category.
+     */
+    [[nodiscard]] unsigned int getUserId() const;
 
     /**
      * @brief Returns the name of this category.
      * @return The name of this category.
      */
-    [[nodiscard]] std::string_view getName() const;
+    [[nodiscard]] QString getName() const;
 
 private:
     unsigned int id;
-    std::string name;
+    unsigned int userId;
+    QString name;
 };
 
 #endif

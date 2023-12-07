@@ -1,11 +1,14 @@
-#include "MainWindow.h"
-
 #include <QApplication>
+
+#include "windows.h"
+#include "Database.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    QApplication application(argc, argv);
+
+    MainWindow mainWindow;
+    mainWindow.show();
+
+    return application.exec();
 }

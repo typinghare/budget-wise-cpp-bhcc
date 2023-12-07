@@ -33,6 +33,28 @@ Within this chapter, we will be covering crucial aspects of development, includi
 
 Adherence to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) is imperative for maintaining consistency and best practices throughout the entire codebase of this project.
 
+#### Includes
+
+All include should follow the order of `essential headers`, `builtin headers`, and `other headers`. The `essential headers` include the corresponding header file of a source file and the UI header file of a window class. The `builtin headers` include all headers that are not created by developers, such as Qt classes. There should be a blank line between different types of headers. The following is a typical example of a window class source file:
+
+~~~c++
+// LoginWindow.cpp
+
+// Essential headers
+#include "LoginWindow.h"
+#include "ui_LoginWindow.h"
+
+// Builtin headers
+#include <QSharedPointer>
+
+// Other headers
+#include "windows.h"
+#include "utils.h"
+#include "constants.h"
+#include "Database.h"
+#include "LocalUser.h"
+~~~
+
 ### Utilities
 
 Ensure the incorporation of utility functions as necessary to align with best practices, thereby enhancing code readability. Utility files are placed under the `util` directory, which includes  `FileUtil` and `WindowUtil`.

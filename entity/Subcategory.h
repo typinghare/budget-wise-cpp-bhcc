@@ -12,7 +12,7 @@ public:
      * @param name The name of this subcategory.
      * @param category The category this subcategory belongs to.
      */
-    Subcategory(unsigned int id, std::string_view name, Category&category);
+    Subcategory(unsigned int id, const QString& name, Category&category);
 
     /**
      * Returns the ID of this subcategory.
@@ -24,7 +24,7 @@ public:
      * Returns the name of this subcategory.
      * @return the name of this subcategory.
      */
-    [[nodiscard]] std::string_view getName() const;
+    [[nodiscard]] QString getName() const;
 
     /**
      * Returns the category this subcategory belongs to.
@@ -34,7 +34,7 @@ public:
 
 private:
     unsigned int id;
-    std::string_view name;
+    QString name;
     Category&category;
 };
 

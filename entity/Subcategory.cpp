@@ -3,16 +3,19 @@
 
 Subcategory::Subcategory(
     const unsigned int id,
-    const std::string_view name,
-    Category&category
-) : id(id), name(name), category(category) {
+    const QString& name,
+    Category& category
+) :
+    id(id),
+    name(name),
+    category(category) {
 }
 
 unsigned int Subcategory::getId() const {
     return id;
 }
 
-std::string_view Subcategory::getName() const {
+QString Subcategory::getName() const {
     return name;
 }
 

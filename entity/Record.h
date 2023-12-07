@@ -1,7 +1,7 @@
 #ifndef ADVANCED_CPP_BHCC_RECORD_H
 #define ADVANCED_CPP_BHCC_RECORD_H
 
-#include "Date.h"
+#include "common/Date.h"
 #include "Category.h"
 #include "Subcategory.h"
 
@@ -17,11 +17,10 @@ public:
      */
     Record(
         unsigned int id,
-        Date date,
-        Category&category,
-        Subcategory&subcategory,
-        double amount
-    );
+        Date createdAt,
+        Category& category,
+        Subcategory& subcategory,
+        double amount);
 
     /**
      * Returns the ID of this record.
@@ -33,7 +32,7 @@ public:
      * Returns the creation date.
      * @return the creation date.
      */
-    [[nodiscard]] Date getDate() const;
+    [[nodiscard]] Date getCreatedAt() const;
 
     /**
      * Returns the category this record belongs to.
@@ -55,7 +54,7 @@ public:
 
 private:
     unsigned int id;
-    Date date;
+    Date createdAt;
     Category&category;
     Subcategory&subcategory;
     double amount;
