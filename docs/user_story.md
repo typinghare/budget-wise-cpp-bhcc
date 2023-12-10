@@ -1,14 +1,14 @@
 # User Story
 
-## Sign Up
+## Sign Up *
 
 As a new user, I want to sign up for an account using my email, eliminating the need for an additional username. This process will also ensure I can receive important emails from the app.
 
-## Sign In
+## Sign In (Login) *
 
 As a user, I want to securely sign in to the system to track my income and expenses. Additionally, I value account safety and would like to receive email notifications in case of sign-ins from new or different devices for added security.
 
-## Sign Out
+## Sign Out *
 
 As a user, I want to be able to sign out of the system from the device, so that I can prevent my account from potential account theft. All my information should be removed from the device, so that even an experienced hacker cannot get the private information from it.
 
@@ -16,11 +16,11 @@ As a user, I want to be able to sign out of the system from the device, so that 
 
 As a user, I want the ability to cancel my account, ensuring that all my personal and financial data are securely removed from the system, and any associated account data, including personal information, transactions, budgets, and history are permanently deleted.
 
-## Create Category
+## Create Category *
 
 As a user, I want to be able to create a new expense category, allowing me to customize and organize my expenses according to my specific needs. Besides, I want the App to ensure that the category name is unique, and give me a warning if the category I am about to create has existed. 
 
-## Create Subcategory
+## Create Subcategory *
 
 As a user, I want the capability to create a subcategory within an existing category, allowing me to manage and track my expenses in a more granular and organized manner. Additionally, I want the App to ensure that the subcategory name is unique within its parent category, and give me a warning if the subcategory I am about to create has existed.
 
@@ -28,7 +28,7 @@ As a user, I want the capability to create a subcategory within an existing cate
 
 As a user, I want the ability to create a financial record, inputting details such as income or expense amount, associated category, subcategory (if applicable), and transaction date. I also expect the app to automatically populate the date field with today's date as the default when I create a new record.
 
-## Edit or Delete Record
+## Edit or Delete Record *
 
 As a user, I want the capability to edit or delete financial records, ensuring accuracy and currency. This will enable me to promptly rectify erroneous entries and remove records when receiving refunds for specific expenses.
 

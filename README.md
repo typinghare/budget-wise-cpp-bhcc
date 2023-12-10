@@ -1,9 +1,11 @@
 # BudgetWise
 
-> This is the final project of the **_2023FA CSC-284-WB_** in BHCC. The requirements of this project are in [Google Docs](https://docs.google.com/document/d/1h_e2R88jX2n8EN1o4uLtIx0yrgCMuwTPUCg5vXB3qNA/edit).
+> This is the final project of the **_2023FA CSC-284-WB_** in BHCC. The requirements of this project are on [Google Docs](https://docs.google.com/document/d/1h_e2R88jX2n8EN1o4uLtIx0yrgCMuwTPUCg5vXB3qNA/edit).
 This is a **private repository** on [GitHub](https://github.com/typinghare/advanced-cpp-bhcc/tree/main/src/final).
 
 BudgetWise serves as an intuitive graphical tool designed for effective budget and expense tracking. Empowering users with the ability to effortlessly input both income and expenses, the platform offers seamless categorization and subcategorization features. Dive into insightful charts that provide a comprehensive overview of total income and expenses within specified categories or subcategories. For a more in-depth understanding of BudgetWise, explore the detailed [User Story](docs/user_story.md). Experience financial management with ease, precision, and visual clarity.
+
+See the [Changelog](./docs/changelog.md) to find the specific timeline and updates of this project.
 
 ## TimeLine
 
@@ -23,7 +25,7 @@ This project is supposed to be accomplished before **Dec 12, 2023**, and the tim
 
 The following is the UML diagram for the four main entities in this project. Each entity has a corresponding table in the server database. Note that in the MVC architecture, entities are also known as models.
 
-<img src="./img/uml_brief.png" alt="UML Brief" style="zoom:50%;" />
+<img src="./docs/img/uml_brief.png" alt="UML Brief" style="zoom:50%;" />
 
 ## Development
 
@@ -57,12 +59,14 @@ All include should follow the order of `essential headers`, `builtin headers`, a
 
 ### Utilities
 
-Ensure the incorporation of utility functions as necessary to align with best practices, thereby enhancing code readability. Utility files are placed under the `util` directory, which includes  `FileUtil` and `WindowUtil`.
+Ensure the incorporation of utility functions as necessary to align with best practices, thereby enhancing code readability. Utility files are placed under the `util` directory, which includes  `FileUtil`,  `WindowUtil` , `TimerUtil`, and so on.
+
+#### FileUtil
 
 Utilize the `FileUtil::open()` method to seamlessly handle file operations. This method not only verifies the file's existence but also performs the tasks of opening the file, invoking a specified callback function, and subsequently closing the file. Below are two illustrative examples demonstrating the application of this versatile method:
 
 ~~~c++
-#include "util/FileUtil.h"
+#include "utils.h"
 
 // Create a QFile object
 QFile file("path/to/the/file");
@@ -88,13 +92,16 @@ FileUtil::write(file, [](QTextStream& outStream) {
 });
 ~~~
 
-Utilize the `Window::navigate()` method to seamlessly navigate from one window to another:
+#### WindowUtil
+
+Utilize the `Window::jump()` method to seamlessly jump from one window to another:
 
 ~~~c++
-#include "util/WindowUtil.h"
+#include "utils.h"
 
 // Navigate to the main window in a Widget member method
 // The current window will automatically close after the main window shows
-WindowUtil::navigate(this, new MainWindow);
+WindowUtil::jump(this, new MainWindow);
 ~~~
 
+#### TimerUtil
