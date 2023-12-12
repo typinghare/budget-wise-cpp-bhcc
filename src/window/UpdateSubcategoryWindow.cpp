@@ -25,8 +25,7 @@ void UpdateSubcategoryWindow::setCategoryname(const QString &categoryName) {
     int count = ui->categoryCombo->count();
     for (int index = 0; index < count; ++index) {
         if (ui->categoryCombo->itemText(index) == categoryName) {
-            ui->categoryCombo->setCurrentIndex(index);
-            return;
+            return ui->categoryCombo->setCurrentIndex(index);
         }
     }
 }
@@ -43,9 +42,10 @@ void UpdateSubcategoryWindow::onOkButtonClicked() {
     QString categoryName = ui->categoryCombo->currentText();
     QString subcategoryName = ui->subcategoryNameInput->text();
     emit confirmed(categoryName, subcategoryName);
+    close();
 }
 
 void UpdateSubcategoryWindow::onCancelButtonClicked() {
     setSubcategoryName("");
-    onOkButtonClicked();
+    close();
 }

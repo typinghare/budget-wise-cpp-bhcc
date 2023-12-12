@@ -114,6 +114,9 @@ void SubcategoryWindow::displaySubcategories(const QString &categoryName) {
     // On selected
     connect(ui->subcategoryTable->selectionModel(), &QItemSelectionModel::selectionChanged,
             this, &SubcategoryWindow::onItemSelected);
+
+    // Delete category list
+    subcategoryList.clear();
 }
 
 void SubcategoryWindow::onItemSelected(const QItemSelection &selected, const QItemSelection &deselected) {

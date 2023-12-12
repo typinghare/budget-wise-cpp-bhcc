@@ -36,7 +36,7 @@ As a user, I want the capability to edit or delete financial records, ensuring a
 
 As a user, I want the ability to establish budget limits for both expense categories and subcategories. I aim to receive timely notifications or emails as I approach or surpass these budget limits. This feature will enable me to proactively manage my spending, aligning with my budget and making necessary adjustments to stay within financial constraints.
 
-## View Data
+## View Data *
 
 As a user, I want the ability to view my financial data presented in a balance sheet or table format, comprehensively displaying my income, expenses, and the resulting balance. Furthermore, I would like the numerical amounts to be visually distinguishable: displaying in red font if the amount is negative, indicating losses or expenses, and in green font if the amount is positive, denoting gains or income. This color-based representation will enhance clarity and enable quick identification of financial trends and status.
 

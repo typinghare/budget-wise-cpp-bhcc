@@ -1,7 +1,8 @@
 #ifndef ADVANCED_CPP_BHCC_RECORD_H
 #define ADVANCED_CPP_BHCC_RECORD_H
 
-#include "src/common/Date.h"
+#include <QDateTime>
+
 #include "Category.h"
 #include "Subcategory.h"
 
@@ -17,9 +18,9 @@ public:
      */
     Record(
         unsigned int id,
-        Date createdAt,
         unsigned int userId,
         unsigned int subcategoryId,
+        QDateTime createdAt,
         double amount,
         double balance);
 
@@ -27,11 +28,6 @@ public:
      * @brief Returns the ID of this record.
      */
     [[nodiscard]] unsigned int getId() const;
-
-    /**
-     * @brief Returns the creation date.
-     */
-    [[nodiscard]] Date getCreatedAt() const;
 
     /**
      * @brief Returns the ID of the user who created this record.
@@ -42,6 +38,11 @@ public:
      * @brief Returns the subcategory this record belongs to.
      */
     [[nodiscard]] unsigned int getSubcategoryId() const;
+
+    /**
+     * @brief Returns the creation date.
+     */
+    [[nodiscard]] QDateTime getCreatedAt() const;
 
     /**
      * @brief Returns the amount of this record.
@@ -55,9 +56,9 @@ public:
 
 private:
     unsigned int id;
-    Date createdAt;
     unsigned int userId;
     unsigned int subcategoryId;
+    QDateTime createdAt;
     double amount;
     double balance;
 };

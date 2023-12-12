@@ -4,9 +4,11 @@
 #include <QTimer>
 #include <QMenuBar>
 #include <QMenu>
+#include <QSharedPointer>
 
 #include "src/windows.h"
 #include "src/utils.h"
+#include "src/services.h"
 #include "src/Database.h"
 #include "src/LocalUser.h"
 #include "src/windows.h"
@@ -25,9 +27,18 @@ MainWindow::MainWindow(QWidget *parent)
     // Set window title
     setWindowTitle("BudgetWise");
 
+    createRecordDialog = new QDialog(this);
+    createRecordWindow = new CreateRecordWindow(createRecordDialog);
+    createRecordWindow->show();
+    createRecordDialog->resize(createRecordWindow->width(), createRecordWindow->height());
+    createRecordDialog->setModal(true);
+
     // Events
-    connect(ui->manageCategoriesButton, SIGNAL(clicked()), this, SLOT(openCategoryWindow()));
-    connect(ui->manageSubcategoriesButton, SIGNAL(clicked()), this, SLOT(openSubcategoryWindow()));
+    connect(ui->manageCategoriesButton, &QPushButton::clicked, this, &MainWindow::openCategoryWindow);
+    connect(ui->manageSubcategoriesButton, &QPushButton::clicked, this, &MainWindow::openSubcategoryWindow);
+    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddButtonClicked);
+    connect(createRecordWindow, &CreateRecordWindow::confirmed, this, &MainWindow::onCreateConfirmed);
+    connect(createRecordWindow, &CreateRecordWindow::canceled, this, &MainWindow::onCreateCanceled);
 
     // Create menu
     createMenu();
@@ -38,6 +49,9 @@ MainWindow::MainWindow(QWidget *parent)
             WindowUtil::jump(this, new LoginWindow, false);
         }
     });
+
+    // Load and display records
+    loadRecords();
 }
 
 MainWindow::~MainWindow() {
@@ -51,11 +65,20 @@ void MainWindow::createMenu() {
 
     // Create a user menu
     QMenu *userMenu = menuBar->addMenu(tr("&User"));
-    QAction *logoutActioin = new QAction(tr("&Logout"), this);
-    connect(logoutActioin, &QAction::triggered, this, &MainWindow::logout);
+    logoutActioin = new QAction(tr("&Logout"), this);
     userMenu->addAction(logoutActioin);
+    connect(logoutActioin, &QAction::triggered, this, &MainWindow::logout);
+}
 
-    qDebug() << "create";
+void MainWindow::loadRecords() {
+    unsigned int userId = LocalUser::get()->getId();
+    RecordService recordService;
+    QList<Record*> recordList = recordService.getAllRecords(userId);
+
+    // createRecordWindow->setSubcategories();
+
+    // Delete list
+    recordList.clear();
 }
 
 void MainWindow::openCategoryWindow() {
@@ -67,6 +90,27 @@ void MainWindow::openSubcategoryWindow() {
 }
 
 void MainWindow::logout() {
+    QString username = LocalUser::get()->getUsername();
     LocalUser::set(nullptr);
-    WindowUtil::jump(this, new LoginWindow);
+
+    logoutActioin->setDisabled(true);
+
+    WindowUtil::jump(this, new LoginWindow(username));
+}
+
+void MainWindow::onAddButtonClicked() {
+    createRecordDialog->setWindowTitle("Create Record");
+    createRecordDialog->exec();
+}
+
+void MainWindow::onCreateConfirmed(unsigned int categoryId, float amount) {
+    createRecordDialog->close();
+
+    auto subcategoryRepository = Database::getInstance()->getSubcategoryRepository();
+    // QSharedPointer<Subcategory> subcategory(subcategoryRepository.getByUserIdAndCategoryIdAndName(
+    //     subcategoryName));
+}
+
+void MainWindow::onCreateCanceled() {
+    createRecordDialog->close();
 }

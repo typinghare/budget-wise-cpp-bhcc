@@ -68,6 +68,9 @@ void CategoryWindow::displayCategories() {
 
     // On double clicked
     connect(ui->categoryTable, &QAbstractItemView::doubleClicked, this, &CategoryWindow::onTableDoubleClicked);
+
+    // Delete category list
+    categoryList.clear();
 }
 
 void CategoryWindow::onAddButtonClicked() {

@@ -27,7 +27,7 @@ void WindowUtil::jump(QWidget *from, QWidget *to, bool smooth) {
         int index = 0;
         float currentWidth = fromWidth;
         float currentHeight = fromHeight;
-        TimerUtil::setInterval(5, [to, count, dx, dy, index, currentWidth, currentHeight]() mutable {
+        TimerUtil::setInterval(3, [to, count, dx, dy, index, currentWidth, currentHeight]() mutable {
             // Update current width and current height
             currentWidth += dx;
             currentHeight += dy;

@@ -9,7 +9,10 @@ SOURCES += \
     src/repository/CategoryRepository.cpp \
     src/repository/RecordRepository.cpp \
     src/repository/SubcategoryRepository.cpp \
+    src/repository/UserInfoRepository.cpp \
+    src/service/RecordService.cpp \
     src/util/TimerUtil.cpp \
+    src/window/CreateRecordWindow.cpp \
     src/window/MainWindow.cpp \
     src/window/LoginWindow.cpp \
     src/window/SignUpWindow.cpp \
@@ -35,7 +38,11 @@ HEADERS += \
     src/repository/CategoryRepository.h \
     src/repository/RecordRepository.h \
     src/repository/SubcategoryRepository.h \
+    src/repository/UserInfoRepository.h \
+    src/service/RecordService.h \
+    src/services.h \
     src/util/TimerUtil.h \
+    src/window/CreateRecordWindow.h \
     src/window/MainWindow.h \
     src/window/LoginWindow.h \
     src/window/SignUpWindow.h \
@@ -62,6 +69,7 @@ HEADERS += \
 
 FORMS += \
     src/window/CategoryWindow.ui \
+    src/window/CreateRecordWindow.ui \
     src/window/ForgotPasswordWindow.ui \
     src/window/LoginWindow.ui \
     src/window/MainWindow.ui \

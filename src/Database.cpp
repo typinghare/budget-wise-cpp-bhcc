@@ -54,6 +54,8 @@ Database::Database() {
 }
 
 void Database::createTables() {
+    // dropTable(query, "subcategory");
+
     createTable(
         "user",
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -61,12 +63,17 @@ void Database::createTables() {
         "auth_string TEXT NOT NULL,"
         "email TEXT NOT NULL");
     createTable(
+        "user_info",
+        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "user_id INTEGER NOT NULL,"
+        "balance REAL NOT NULL,"
+        "FOREIGN KEY (user_id) REFERENCES user(id)");
+    createTable(
         "category",
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
         "user_id INTEGER NOT NULL,"
         "name TEXT NOT NULL,"
         "FOREIGN KEY (user_id) REFERENCES user(id)");
-    // dropTable(query, "subcategory");
     createTable(
         "subcategory",
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -75,10 +82,25 @@ void Database::createTables() {
         "name TEXT NOT NULL,"
         "FOREIGN KEY (user_id) REFERENCES user(id),"
         "FOREIGN KEY (category_id) REFERENCES category(id)");
+    createTable(
+        "record",
+        "id INTEGER PRIMARY KEY,"
+        "user_id INTEGER,"
+        "subcategory_id INTEGER,"
+        "created_at TEXT,"
+        "amount REAL,"
+        "balance REAL,"
+        "FOREIGN KEY (user_id) REFERENCES user(id)"
+        "FOREIGN KEY (subcategory_id) REFERENCES subcategory(id)"
+        );
 }
 
 UserRepository Database::getUserRepository() {
     return userRepository;
+}
+
+UserInfoRepository Database::getUserInfoRepository() {
+    return userInfoRepository;
 }
 
 CategoryRepository Database::getCategoryRepository() {

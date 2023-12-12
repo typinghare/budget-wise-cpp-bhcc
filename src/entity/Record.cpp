@@ -2,16 +2,16 @@
 
 Record::Record(
     unsigned int id,
-    Date createdAt,
     unsigned int userId,
     unsigned int subcategoryId,
+    QDateTime createdAt,
     double amount,
     double balance
-) :
+    ) :
     id(id),
-    createdAt(createdAt),
     userId(userId),
     subcategoryId(subcategoryId),
+    createdAt(createdAt),
     amount(amount),
     balance(balance){
 }
@@ -20,16 +20,16 @@ unsigned int Record::getId() const {
     return id;
 }
 
-Date Record::getCreatedAt() const {
-    return createdAt;
-}
-
 unsigned int Record::getUserId() const {
     return userId;
 }
 
 unsigned int Record::getSubcategoryId() const {
     return subcategoryId;
+}
+
+QDateTime Record::getCreatedAt() const {
+    return createdAt;
 }
 
 double Record::getAmount() const {

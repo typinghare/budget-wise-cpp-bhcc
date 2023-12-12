@@ -20,3 +20,7 @@
 
 * Revamped the directory structure for improved clarity and organization.
 * Implemented and extended the subcategory window functionality. Users can now effortlessly add, update, and delete subcategories directly within the window. Additionally, a convenient feature allows users to double-click on a category in the main window, instantly navigating to the subcategory window. When this occurs, the subcategory window's table is dynamically filtered to display only the subcategories associated with the selected category, enhancing user efficiency and focus.
+
+## Dec 12 to Dec 14
+
+* 

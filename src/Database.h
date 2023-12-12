@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 
 #include "repository/UserRepository.h"
+#include "repository/UserInfoRepository.h"
 #include "repository/CategoryRepository.h"
 #include "repository/SubcategoryRepository.h"
 #include "repository/RecordRepository.h"
@@ -53,6 +54,11 @@ public:
     UserRepository getUserRepository();
 
     /**
+     * @brief Returns the user info repository.
+     */
+    UserInfoRepository getUserInfoRepository();
+
+    /**
      * @brief Returns the category repository.
      */
     CategoryRepository getCategoryRepository();
@@ -73,6 +79,7 @@ private:
 
     // Repositories
     UserRepository userRepository;
+    UserInfoRepository userInfoRepository;
     CategoryRepository categoryRepository;
     SubcategoryRepository subcategoryRepository;
     RecordRepository recordRepository;

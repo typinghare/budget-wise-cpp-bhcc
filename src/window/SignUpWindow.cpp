@@ -54,12 +54,19 @@ void SignUpWindow::signUp() {
     // Sign up
     QString email = ui->emailInput->text();
     QString authString = PasswordUtil::encrypt(password, SecretKey::USER_PASSWORD);
-    User* newUser = userRepository.create(username, authString, email);
-    if (newUser == nullptr) {
+    QSharedPointer<User> newUser(userRepository.create(username, authString, email));
+    if (newUser.isNull()) {
         qDebug() << "Fail to sign up.";
-    } else {
-        QMessageBox::information(this, "Success", "You created an account successfully!");
     }
+
+    // Create user info
+    auto userInfoRepository = Database::getInstance()->getUserInfoRepository();
+    QSharedPointer<UserInfo> userInfo(userInfoRepository.create(newUser->getId()));
+    if (userInfo.isNull()) {
+        qDebug() << "Fail to sign up.";
+    }
+
+    QMessageBox::information(this, "Success", "You created an account successfully!");
 
     // Jump to the main window
     WindowUtil::jump(this, new LoginWindow(username));
