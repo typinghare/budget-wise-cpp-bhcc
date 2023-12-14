@@ -5,7 +5,6 @@
 #include <QWidget>
 #include <QDialog>
 #include <QStandardItemModel>
-#include <QItemSelection>
 #include <QAction>
 
 #include "UpdateCategoryWindow.h"
@@ -27,9 +26,25 @@ private:
     void createMenu();
 
     /**
+     * @brief Load subcategories and add them to the create record window.
+     */
+    void loadSubcategories();
+
+    /**
      * @brief Loads and displays records.
      */
     void loadRecords();
+
+    /**
+     * @brief Loads user's current balance.
+     */
+    void loadCurrentBalance();
+
+    /**
+     * @brief Sets balance.
+     * @param balance The balance to set.s
+     */
+    void setBalance(double balance);
 
 public slots:
     /**
@@ -52,7 +67,7 @@ public slots:
      * @param subcategoryId The ID of the selected subcategory.
      * @param amount The amount of the new record.
      */
-    void onCreateConfirmed(unsigned int categoryId, float amount);
+    void onCreateConfirmed(unsigned int categoryId, unsigned int subcategoryId, double amount);
 
     /**
      * @brief Slot called when the canceled singal from the create record window is received.
@@ -64,6 +79,16 @@ public slots:
      */
     void onAddButtonClicked();
 
+    /**
+     * @brief Deletes the last record.
+     */
+    void onDeleteLastButtonClicked();
+
+    /**
+     * @brief onViewButtonClicked
+     */
+    void onViewButtonClicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -71,7 +96,26 @@ private:
 
     QDialog *createRecordDialog;
     CreateRecordWindow *createRecordWindow;
-    QStandardItem *itemModel;
+    QStandardItemModel *itemModel;
+    QMap<unsigned int, QString> categoryIdMap;          // category ID => category name
+    QMap<unsigned int, QString> subcategoryIdMap;       // subcategory ID => subcategory name
+
+    void setRow(
+        int row,
+        QDateTime createdAt,
+        const QString& categoryName,
+        const QString& subcategoryName,
+        double amount,
+        double balance
+        );
+
+    void unshiftRow(
+        QDateTime createdAt,
+        const QString& categoryName,
+        const QString& subcategoryName,
+        double amount,
+        double balance
+        );
 };
 
 #endif // MAINWINDOW_H

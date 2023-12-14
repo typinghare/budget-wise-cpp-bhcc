@@ -13,6 +13,7 @@ Category* CategoryRepository::get(unsigned int id) {
 
     if (!query.exec()) {
         qDebug() << "Failed to get category:" << query.lastError().text();
+        return nullptr;
     }
 
     if (!query.next()) {
@@ -79,11 +80,10 @@ QList<Category *> CategoryRepository::getAll(unsigned int userId) {
     return list;
 }
 
-bool CategoryRepository::remove(unsigned int userId, const QString& name) {
+bool CategoryRepository::remove(unsigned int id) {
     QSqlQuery query;
-    query.prepare("DELETE FROM category WHERE user_id = :userId AND name = :name");
-    query.bindValue(":userId", userId);
-    query.bindValue(":name", name);
+    query.prepare("DELETE FROM category WHERE id = :id");
+    query.bindValue(":id", id);
 
     if (!query.exec()) {
         qDebug() << "Failed to delete category:" << query.lastError().text();

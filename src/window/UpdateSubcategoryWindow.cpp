@@ -42,10 +42,8 @@ void UpdateSubcategoryWindow::onOkButtonClicked() {
     QString categoryName = ui->categoryCombo->currentText();
     QString subcategoryName = ui->subcategoryNameInput->text();
     emit confirmed(categoryName, subcategoryName);
-    close();
 }
 
 void UpdateSubcategoryWindow::onCancelButtonClicked() {
     setSubcategoryName("");
-    close();
 }

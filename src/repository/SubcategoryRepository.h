@@ -2,11 +2,18 @@
 #define SUBCATEGORYREPOSITORY_H
 
 #include <QList>
+#include <QSharedPointer>
 
 #include "src/entity/Subcategory.h"
 
 class SubcategoryRepository {
 public:
+    /**
+     * @brief Retrieves and returns a subcateogry.
+     * @param id The ID of the subcategory.
+     */
+    Subcategory* get(unsigned int id);
+
     /**
      * @brief Creates a subcategory.
      * @param name The name of the subcategory.
@@ -21,7 +28,7 @@ public:
      * @param userId The ID of the user who created this subcategory.
      * @return A list of subcategory entity pointers;
      */
-    QList<Subcategory*> getAll(unsigned int userId);
+    QList<Subcategory*> getAllByUserId(unsigned int userId);
 
     /**
      * @brief Retrieves all subcategories.
@@ -29,7 +36,7 @@ public:
      * @param categoryId The ID of the category this subcategory belongs to.
      * @return A list of subcategory entity pointers;
      */
-    QList<Subcategory*> getAll(unsigned int userId, unsigned int categoryId);
+    QList<Subcategory*> getAllByCategoryId(unsigned int categoryId);
 
     /**
      * @brief Retrieves category.
@@ -45,11 +52,10 @@ public:
 
     /**
      * @brief Deletes all subcategories.
-     * @param userId The ID of the user who created this subcategory.
      * @param categoryId The ID of the category this subcategory belongs to.
      * @return True if deleted successfully; false otherwise.
      */
-    bool removeByCategoryId(unsigned int userId, unsigned int categoryId);
+    bool removeByCategoryId(unsigned int categoryId);
 
     /**
      * @brief Deletes a subcategory.

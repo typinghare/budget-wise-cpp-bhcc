@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>640</width>
     <height>500</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>410</y>
+      <y>430</y>
       <width>175</width>
       <height>32</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>410</y>
+      <y>430</y>
       <width>175</width>
       <height>32</height>
      </rect>
@@ -40,21 +40,11 @@
      <string>Manage Subcategories</string>
     </property>
    </widget>
-   <widget class="QTableView" name="recordTable">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>450</width>
-      <height>350</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="addButton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>380</y>
+      <y>400</y>
       <width>100</width>
       <height>32</height>
      </rect>
@@ -67,26 +57,81 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>380</y>
+      <y>400</y>
       <width>100</width>
       <height>32</height>
      </rect>
     </property>
     <property name="text">
-     <string>View</string>
+     <string>Insight</string>
     </property>
    </widget>
    <widget class="QPushButton" name="deleteLastButton">
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>380</y>
+      <y>400</y>
       <width>100</width>
       <height>32</height>
      </rect>
     </property>
     <property name="text">
      <string>Delete Last</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="recordTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>600</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentBalanceLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Current Balance: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="balanceLabel">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>$ 0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>

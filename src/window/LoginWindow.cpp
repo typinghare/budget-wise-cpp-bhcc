@@ -63,10 +63,10 @@ void LoginWindow::login() {
         return ui->passwordStatusLabel->setText("Incorrect password");
     }
 
-    qDebug() << user->getId() << user->getAuthString();
+    qDebug() << "Login user ID: " << user->getId();
 
     // Set local user
-    LocalUser::set(user.data());
+    LocalUser::set(new User(user->getId(), user->getUsername(), user->getAuthString(), user->getEmail()));
 
     // Jump to the main window
     WindowUtil::jump(this, new MainWindow);

@@ -74,12 +74,12 @@ void SubcategoryWindow::displaySubcategories(const QString &categoryName) {
     auto subcategoryRepository = Database::getInstance()->getSubcategoryRepository();
     QList<Subcategory*> subcategoryList;
     if (categoryName == "") {
-        subcategoryList = subcategoryRepository.getAll(userId);
+        subcategoryList = subcategoryRepository.getAllByUserId(userId);
     } else {
         auto categoryRepository = Database::getInstance()->getCategoryRepository();
         QSharedPointer<Category> category(categoryRepository.getByUserIdAndName(userId, categoryName));
         if (!category.isNull()) {
-            subcategoryList = subcategoryRepository.getAll(userId, category->getId());
+            subcategoryList = subcategoryRepository.getAllByCategoryId(category->getId());
         }
     }
 

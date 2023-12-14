@@ -54,7 +54,11 @@ Database::Database() {
 }
 
 void Database::createTables() {
-    // dropTable(query, "subcategory");
+    // dropTable("user");
+    // dropTable("user_info");
+    // dropTable("category");
+    // dropTable("subcategory");
+    // dropTable("record");
 
     createTable(
         "user",
@@ -86,13 +90,26 @@ void Database::createTables() {
         "record",
         "id INTEGER PRIMARY KEY,"
         "user_id INTEGER,"
+        "category_id INTEGER,"
         "subcategory_id INTEGER,"
         "created_at TEXT,"
         "amount REAL,"
-        "balance REAL,"
-        "FOREIGN KEY (user_id) REFERENCES user(id)"
+        "FOREIGN KEY (user_id) REFERENCES user(id),"
+        "FOREIGN KEY (category_id) REFERENCES category(id),"
         "FOREIGN KEY (subcategory_id) REFERENCES subcategory(id)"
         );
+
+    // Create a view
+    QSqlQuery query;
+    query.exec("DROP VIEW IF EXISTS record_with_balance;");
+    QString recordWithBalanceSql(
+        "CREATE VIEW IF NOT EXISTS record_with_balance AS "
+        "SELECT t.*, "
+        "(SELECT SUM(amount) FROM record WHERE id <= t.id AND user_id = t.user_id) AS balance "
+        "FROM record AS t;");
+    if (!query.exec(recordWithBalanceSql)) {
+        qDebug() << "Failed to create view:" << query.lastError().text();
+    }
 }
 
 UserRepository Database::getUserRepository() {

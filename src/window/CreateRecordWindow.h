@@ -17,29 +17,29 @@ public:
     ~CreateRecordWindow();
 
     /**
-     * @brief Puts the subcategory names into the combo box.
-     * @param subcategoryList A list of subcategory names.
+     * @brief Refreshes categories.
      */
-    void setSubcategories(QList<Subcategory *> subcategoryList);
+    void refreshCategories();
 
     /**
-     * @brief Returns the number of subcategories in the combo box.
+     * @brief Returns the number of categories in the combo box.
      */
-    int getSubcategoryCount();
+    int getCategoryCount();
 
     /**
      * @brief set the amount.
      * @param amount The amount.
      */
-    void setAmount(float amount);
+    void setAmount(double amount);
 
 signals:
     /**
      * @brief User confirms the record.
+     * @param categoryId The ID of the selected category.
      * @param subcategoryId The ID of the selected subcategory.
      * @param amount The amount of the money of the record.
      */
-    void confirmed(unsigned int subcategoryId, float amount);
+    void confirmed(unsigned int categoryId, unsigned int subcategoryId, double amount);
 
     /**
      * @brief Creation canceled.
@@ -57,9 +57,18 @@ public slots:
      */
     void onCancelButtonClicked();
 
+    /**
+     * @brief onComboBoxActivated
+     * @param index
+     */
+    void onComboBoxActivated(int index);
+
 private:
     Ui::CreateRecordWindow *ui;
+    QMap<int, int> categoryIdMap;
     QMap<int, int> subcategoryIdMap;
+
+    void loadSubcategories(unsigned int categoryId);
 };
 
 #endif // CREATERECORDWINDOW_H

@@ -5,7 +5,11 @@
 
 class UserInfoRepository {
 public:
-    UserInfoRepository();
+    /**
+     * @brief Retrieves and returns a user info.
+     * @param userId The ID of the specific user.
+     */
+    UserInfo* getByUserId(unsigned int userId);
 
     /**
      * @brief Creates a user info; the balance is 0 by default.
@@ -15,20 +19,11 @@ public:
     UserInfo* create(unsigned int userId);
 
     /**
-     * @brief Retrieves and returns the balance of a user.
-     * @param userId The ID of the user.
-     */
-    float getBalance(unsigned int userId);
-
-    /**
      * @brief Sets balance for an user.
      * @param userId The ID of the user.
      * @param balance The balance to update of the user.
      */
     bool updateBalance(unsigned int userId, float balance);
-};
-
-class FailToGetUserInfoException: public std::exception {
 };
 
 #endif // USERINFOREPOSITORY_H

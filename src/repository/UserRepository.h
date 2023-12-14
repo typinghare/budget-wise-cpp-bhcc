@@ -10,8 +10,6 @@
  */
 class UserRepository {
 public:
-    UserRepository();
-
     /**
      * @brief Retrieves a user by its ID.
      * @param id The ID of the user.

@@ -11,18 +11,22 @@ public:
     /**
      * Creates a record.
      * @param id The ID of this record.
-     * @param date The creation date.
-     * @param category The category this record belongs to.
-     * @param subcategory The subcategory this record belongs to.
+     * @param
+     * @param categoryId The ID of the category this record belongs to.
+     * @param subcategoryId The of the subcategory this record belongs to.
+     * @param createdAt The creation date.
      * @param amount The amount of this record (in US dollars).
+     * @param balance The balance of the user after this record (in US dollars).
      */
     Record(
         unsigned int id,
         unsigned int userId,
+        unsigned int categoryId,
         unsigned int subcategoryId,
         QDateTime createdAt,
         double amount,
-        double balance);
+        double balance
+        );
 
     /**
      * @brief Returns the ID of this record.
@@ -35,7 +39,12 @@ public:
     [[nodiscard]] unsigned int getUserId() const;
 
     /**
-     * @brief Returns the subcategory this record belongs to.
+     * @brief Returns the ID of the category this record belongs to.
+     */
+    [[nodiscard]] unsigned int getCategoryId() const;
+
+    /**
+     * @brief Returns the ID of the subcategory this record belongs to.
      */
     [[nodiscard]] unsigned int getSubcategoryId() const;
 
@@ -54,9 +63,15 @@ public:
      */
     [[nodiscard]] double getBalance() const;
 
+    /**
+     * @brief Sets the balance
+     */
+    void setBalance(double balance);
+
 private:
     unsigned int id;
     unsigned int userId;
+    unsigned int categoryId;
     unsigned int subcategoryId;
     QDateTime createdAt;
     double amount;

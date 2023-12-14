@@ -3,8 +3,6 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-UserInfoRepository::UserInfoRepository() {}
-
 UserInfo* UserInfoRepository::create(unsigned int userId) {
     const float balance = 0.0;
 
@@ -21,23 +19,28 @@ UserInfo* UserInfoRepository::create(unsigned int userId) {
     return new UserInfo(query.lastInsertId().toInt(), userId, balance);
 }
 
-float UserInfoRepository::getBalance(unsigned int userId) {
+UserInfo* UserInfoRepository::getByUserId(unsigned int userId) {
     QSqlQuery query;
-    query.prepare("SELECT balance FROM user_info WHERE user_id = :userId");
+    query.prepare("SELECT id, balance FROM user_info WHERE user_id = :userId LIMIT 1");
     query.bindValue(":userId", userId);
 
-    if (!query.exec()) {
-        throw new FailToGetUserInfoException();
+    if (!query.exec() || !query.next()) {
+        qDebug() << "Fail to get user by user ID";
+        return nullptr;
     }
 
-    return query.value("balance").toFloat();
+    unsigned int id = query.value("id").toInt();
+    float balance = query.value("balance").toFloat();
+
+    return new UserInfo(id, userId, balance);
 }
 
 bool UserInfoRepository::updateBalance(unsigned int userId, float balance) {
+    qDebug() << balance;
     QSqlQuery query;
     query.prepare("UPDATE user_info SET balance = :balance WHERE user_id = :userId");
-    query.bindValue(":userId", userId);
     query.bindValue(":balance", balance);
+    query.bindValue(":userId", userId);
 
     if (!query.exec()) {
         qDebug() << "Failed to update user's balance:" << query.lastError().text();

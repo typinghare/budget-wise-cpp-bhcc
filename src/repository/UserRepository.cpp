@@ -3,8 +3,6 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-UserRepository::UserRepository() = default;
-
 User* UserRepository::get(unsigned int id) {
     QSqlQuery query;
     query.prepare("SELECT username, auth_string, email FROM user WHERE id = :id");

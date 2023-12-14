@@ -52,6 +52,7 @@ private slots:
      * @brief Closes this window; triggers the categoryNameConfirmed signal.
      */
     void onCancelButtonClicked();
+
 private:
     Ui::UpdateSubcategoryWindow *ui;
 };

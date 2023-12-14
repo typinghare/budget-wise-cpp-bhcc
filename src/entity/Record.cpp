@@ -3,6 +3,7 @@
 Record::Record(
     unsigned int id,
     unsigned int userId,
+    unsigned int categoryId,
     unsigned int subcategoryId,
     QDateTime createdAt,
     double amount,
@@ -10,6 +11,7 @@ Record::Record(
     ) :
     id(id),
     userId(userId),
+    categoryId(categoryId),
     subcategoryId(subcategoryId),
     createdAt(createdAt),
     amount(amount),
@@ -22,6 +24,10 @@ unsigned int Record::getId() const {
 
 unsigned int Record::getUserId() const {
     return userId;
+}
+
+unsigned int Record::getCategoryId() const {
+    return categoryId;
 }
 
 unsigned int Record::getSubcategoryId() const {
@@ -38,4 +44,8 @@ double Record::getAmount() const {
 
 double Record::getBalance() const {
     return balance;
+}
+
+void Record::setBalance(double balance) {
+    this->balance = balance;
 }

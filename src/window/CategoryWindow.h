@@ -77,6 +77,16 @@ public slots:
      */
     void onTableDoubleClicked(const QModelIndex& index);
 
+    /**
+     * @brief onManageCategoriesButtonClicked
+     */
+    void onManageCategoriesButtonClicked();
+
+    /**
+     * @brief onRecordButtonClicked
+     */
+    void onRecordButtonClicked();
+
 private:
     Ui::CategoryWindow *ui;
     QDialog *updateCategoryDialog;
@@ -84,6 +94,8 @@ private:
     QStandardItemModel *itemModel;
     QSet<int> selectedIndexes;
     int updateIndex;
+
+    bool checkSingleSelected();
 };
 
 #endif // CATEGORYWINDOW_H

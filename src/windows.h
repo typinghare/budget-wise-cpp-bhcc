@@ -11,5 +11,7 @@
 #include "window/SubcategoryWindow.h"
 #include "window/UpdateCategoryWindow.h"
 #include "window/UpdateSubcategoryWindow.h"
+#include "window/ViewWindow.h"
+#include "window/RecordsWindow.h"
 
 #endif // WINDOWS_H

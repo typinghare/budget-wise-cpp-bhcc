@@ -37,15 +37,14 @@ public:
      * @param userId The ID of the user.
      * @return A list of categories.
      */
-    QList<Category *> getAll(unsigned int userId);
+    QList<Category*> getAll(unsigned int userId);
 
     /**
      * @brief Deletes a category.
-     * @param userId The ID of the user who creates the category.
-     * @param name The name of this category.
+     * @param id The ID of the category to delete.
      * @return true if a category is deleted; false otherwise.
      */
-    bool remove(unsigned int userId, const QString& name);
+    bool remove(unsigned int id);
 
     /**
      * @brief Updates the name of the category.

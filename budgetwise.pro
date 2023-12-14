@@ -1,16 +1,19 @@
-QT += core gui network sql
+QT += core gui network sql charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
 SOURCES += \
+    src/Dummy.cpp \
     src/main.cpp \
     src/repository/CategoryRepository.cpp \
     src/repository/RecordRepository.cpp \
     src/repository/SubcategoryRepository.cpp \
     src/repository/UserInfoRepository.cpp \
+    src/service/CategoryService.cpp \
     src/service/RecordService.cpp \
+    src/service/SubcategoryService.cpp \
     src/util/TimerUtil.cpp \
     src/window/CreateRecordWindow.cpp \
     src/window/MainWindow.cpp \
@@ -20,6 +23,7 @@ SOURCES += \
     src/window/CategoryWindow.cpp \
     src/window/SubcategoryWindow.cpp \
     src/window/UpdateCategoryWindow.cpp \
+    src/window/RecordsWindow.cpp \
     src/entity/User.cpp \
     src/entity/UserInfo.cpp \
     src/entity/Category.cpp \
@@ -32,14 +36,19 @@ SOURCES += \
     src/common/Date.cpp \
     src/Database.cpp \
     src/LocalUser.cpp \
-    src/window/UpdateSubcategoryWindow.cpp
+    src/window/UpdateSubcategoryWindow.cpp \
+    src/window/ViewWindow.cpp
 
 HEADERS += \
+    src/Dummy.h \
+    src/window/RecordsWindow.h \
     src/repository/CategoryRepository.h \
     src/repository/RecordRepository.h \
     src/repository/SubcategoryRepository.h \
     src/repository/UserInfoRepository.h \
+    src/service/CategoryService.h \
     src/service/RecordService.h \
+    src/service/SubcategoryService.h \
     src/services.h \
     src/util/TimerUtil.h \
     src/window/CreateRecordWindow.h \
@@ -49,6 +58,10 @@ HEADERS += \
     src/window/ForgotPasswordWindow.h \
     src/window/CategoryWindow.h \
     src/window/SubcategoryWindow.h \
+    src/window/UpdateCategoryWindow.h \
+    src/window/UpdateSubcategoryWindow.h \
+    src/window/ViewWindow.h \
+    src/window/RecordsWindow.h \
     src/entity/User.h \
     src/entity/UserInfo.h \
     src/entity/Category.h \
@@ -63,11 +76,10 @@ HEADERS += \
     src/LocalUser.h \
     src/utils.h \
     src/test.h \
-    src/window/UpdateCategoryWindow.h \
-    src/window/UpdateSubcategoryWindow.h \
     src/windows.h
 
 FORMS += \
+    src/window/RecordsWindow.ui \
     src/window/CategoryWindow.ui \
     src/window/CreateRecordWindow.ui \
     src/window/ForgotPasswordWindow.ui \
@@ -76,7 +88,8 @@ FORMS += \
     src/window/SignUpWindow.ui \
     src/window/SubcategoryWindow.ui \
     src/window/UpdateCategoryWindow.ui \
-    src/window/UpdateSubcategoryWindow.ui
+    src/window/UpdateSubcategoryWindow.ui \
+    src/window/ViewWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

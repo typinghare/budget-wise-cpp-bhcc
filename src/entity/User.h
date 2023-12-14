@@ -41,7 +41,6 @@ public:
      */
     [[nodiscard]] QString getEmail() const;
 
-
 private:
     unsigned int id;
     QString username;

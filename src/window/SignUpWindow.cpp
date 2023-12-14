@@ -44,8 +44,13 @@ void SignUpWindow::signUp() {
         return ui->usernameStatusLabel->setText(tr("Username already exists"));
     }
 
-    // Check if two passwords are the same
+    // Check if the length of the password is larger than six
     QString password = ui->passwordInput->text();
+    if (password.size() <= 6) {
+        return ui->passwordStatusLabel->setText("Password must be longer than six");
+    }
+
+    // Check if two passwords are the same
     QString confirmPassword = ui->confirmPasswordInput->text();
     if (password != confirmPassword) {
         return ui->passwordStatusLabel->setText(tr("Two passwords are not the same!"));
@@ -56,16 +61,19 @@ void SignUpWindow::signUp() {
     QString authString = PasswordUtil::encrypt(password, SecretKey::USER_PASSWORD);
     QSharedPointer<User> newUser(userRepository.create(username, authString, email));
     if (newUser.isNull()) {
-        qDebug() << "Fail to sign up.";
+        qDebug() << "Fail to sign up (fail to create user).";
+        return;
     }
 
     // Create user info
-    auto userInfoRepository = Database::getInstance()->getUserInfoRepository();
-    QSharedPointer<UserInfo> userInfo(userInfoRepository.create(newUser->getId()));
-    if (userInfo.isNull()) {
-        qDebug() << "Fail to sign up.";
-    }
+    // auto userInfoRepository = Database::getInstance()->getUserInfoRepository();
+    // QSharedPointer<UserInfo> userInfo(userInfoRepository.create(newUser->getId()));
+    // if (userInfo.isNull()) {
+    //     qDebug() << "Fail to sign up (fail to create user info).";
+    //     return;
+    // }
 
+    qDebug() << "Created user: " << newUser->getId();
     QMessageBox::information(this, "Success", "You created an account successfully!");
 
     // Jump to the main window

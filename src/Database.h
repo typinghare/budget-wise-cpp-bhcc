@@ -14,6 +14,9 @@
  */
 class Database {
 private:
+    /**
+     * @brief INSTANCE
+     */
     static Database* INSTANCE;
 
     /**

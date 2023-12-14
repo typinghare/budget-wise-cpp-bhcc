@@ -9,6 +9,7 @@
 #include "src/windows.h"
 #include "src/LocalUser.h"
 #include "src/Database.h"
+#include "src/service/CategoryService.h"
 
 CategoryWindow::CategoryWindow(QWidget *parent) :
     QWidget(parent),
@@ -31,8 +32,9 @@ CategoryWindow::CategoryWindow(QWidget *parent) :
     connect(ui->updateButton, &QPushButton::clicked, this, &CategoryWindow::onUpdateButtonClicked);
     connect(ui->deletButton, &QPushButton::clicked, this, &CategoryWindow::deleteSelectedCategory);
     connect(ui->backButton, &QPushButton::clicked, this, &CategoryWindow::back);
-    connect(updateCategoryWindow, &UpdateCategoryWindow::categoryNameConfirmed,
-            this, &CategoryWindow::onUpdateConfirmed);
+    connect(ui->manageSubcategoriesButton, &QPushButton::clicked, this, &CategoryWindow::onManageCategoriesButtonClicked);
+    connect(ui->recordsButton, &QPushButton::clicked, this, &CategoryWindow::onRecordButtonClicked);
+    connect(updateCategoryWindow, &UpdateCategoryWindow::categoryNameConfirmed, this, &CategoryWindow::onUpdateConfirmed);
 
     // Display categories
     displayCategories();
@@ -40,6 +42,8 @@ CategoryWindow::CategoryWindow(QWidget *parent) :
 
 CategoryWindow::~CategoryWindow() {
     delete ui;
+    delete updateCategoryDialog;
+    delete itemModel;
 }
 
 void CategoryWindow::displayCategories() {
@@ -85,15 +89,7 @@ void CategoryWindow::onAddButtonClicked() {
 }
 
 void CategoryWindow::onUpdateButtonClicked() {
-    if (selectedIndexes.isEmpty()) {
-        showStatusMessage("You must select a category first!", "red");
-        return;
-    }
-
-    if (selectedIndexes.size() > 1) {
-        showStatusMessage("You must select only one category!", "red");
-        return;
-    }
+    checkSingleSelected();
 
     updateIndex = *selectedIndexes.begin();
 
@@ -103,6 +99,20 @@ void CategoryWindow::onUpdateButtonClicked() {
 
     updateCategoryDialog->setWindowTitle("Update Category");
     updateCategoryDialog->exec();
+}
+
+bool CategoryWindow::checkSingleSelected() {
+    if (selectedIndexes.isEmpty()) {
+        showStatusMessage("You must select a category first!", "red");
+        return false;
+    }
+
+    if (selectedIndexes.size() > 1) {
+        showStatusMessage("You must select only one category!", "red");
+        return false;
+    }
+
+    return true;
 }
 
 void CategoryWindow::onUpdateConfirmed(const QString& categoryName) {
@@ -136,6 +146,7 @@ void CategoryWindow::addCategory(const QString &categoryName) {
     QSharedPointer<Category> newCategory(categoryRepository.create(userId, categoryName));
     if (newCategory.isNull()) {
         qDebug() << "Fail to create the category.";
+        return;
     }
 
     // Append the catgory to the list
@@ -206,6 +217,7 @@ void CategoryWindow::deleteSelectedCategory() {
     int userId = LocalUser::get()->getId();
 
     auto categoryRepository = Database::getInstance()->getCategoryRepository();
+    CategoryService categoryService;
     QList<int> deletedRows;
     for (QSet<int>::const_iterator it = selectedIndexes.constBegin(); it != selectedIndexes.constEnd(); ++it) {
         int row = *it;
@@ -215,18 +227,11 @@ void CategoryWindow::deleteSelectedCategory() {
         QString categoryName = item->data(Qt::DisplayRole).toString();
 
         // Remove the category
-        bool removeResult = categoryRepository.remove(userId, categoryName);
-        if (!removeResult) {
+        QSharedPointer<Category> category(categoryRepository.getByUserIdAndName(userId, categoryName));
+        if (category.isNull()) {
             continue;
         }
-
-        // Remove all related subcategories
-        QSharedPointer<Category> category(categoryRepository.getByUserIdAndName(userId, categoryName));
-        if (!category.isNull()) {
-            unsigned int categoryId = category->getId();
-            auto subcategoryRepository = Database::getInstance()->getSubcategoryRepository();
-            subcategoryRepository.removeByCategoryId(userId, categoryId);
-        }
+        categoryService.deleteCategory(category->getId());
     }
 
     // Remove the rows from the table view
@@ -249,11 +254,32 @@ void CategoryWindow::showStatusMessage(const QString& message, const QString& co
 }
 
 void CategoryWindow::onTableDoubleClicked(const QModelIndex &index) {
-    if (!index.isValid()) {
+    onManageCategoriesButtonClicked();
+    // if (!index.isValid()) {
+    //     return;
+    // }
+
+    // int rowIndex = index.row();
+    // if (rowIndex < 0) {
+    //     return;
+    // }
+
+    // // Check category name
+    // auto categoryName = itemModel->item(rowIndex, 0)->data(Qt::DisplayRole).toString();
+    // if (categoryName == "") {
+    //     return;
+    // }
+
+    // // Jump to the subcategory window
+    // WindowUtil::jump(this, new SubcategoryWindow(categoryName));
+}
+
+void CategoryWindow::onManageCategoriesButtonClicked() {
+    if (!checkSingleSelected()) {
         return;
     }
 
-    int rowIndex = index.row();
+    int rowIndex = *selectedIndexes.begin();
     if (rowIndex < 0) {
         return;
     }
@@ -263,8 +289,27 @@ void CategoryWindow::onTableDoubleClicked(const QModelIndex &index) {
     if (categoryName == "") {
         return;
     }
-    qDebug() << rowIndex;
 
     // Jump to the subcategory window
     WindowUtil::jump(this, new SubcategoryWindow(categoryName));
+}
+
+void CategoryWindow::onRecordButtonClicked() {
+    if (!checkSingleSelected()) {
+        return;
+    }
+
+    int rowIndex = *selectedIndexes.begin();
+    if (rowIndex < 0) {
+        return;
+    }
+
+    // Check category name
+    auto categoryName = itemModel->item(rowIndex, 0)->data(Qt::DisplayRole).toString();
+    if (categoryName == "") {
+        return;
+    }
+
+    // Jump to the records window
+    WindowUtil::jump(this, new RecordsWindow(categoryName));
 }

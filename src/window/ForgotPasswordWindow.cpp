@@ -32,8 +32,7 @@ ForgotPasswordWindow::ForgotPasswordWindow(QWidget *parent) :
     setTabOrder(ui->passwordInput, ui->confirmPasswordInput);
 }
 
-ForgotPasswordWindow::~ForgotPasswordWindow()
-{
+ForgotPasswordWindow::~ForgotPasswordWindow() {
     delete ui;
 }
 
@@ -67,11 +66,16 @@ void ForgotPasswordWindow::resetPassword() {
         return ui->emailStatusLabel->setText(tr("Email does not match the username"));
     }
 
-    // Check if two passwords are the same
+    // Check if the length of the password is larger than six
     QString password = ui->passwordInput->text();
+    if (password.size() <= 6) {
+        return ui->passwordStatusLabel->setText("Password must be longer than six");
+    }
+
+    // Check if two passwords are the same
     QString confirmPassword = ui->confirmPasswordInput->text();
     if (password != confirmPassword) {
-        return ui->passwordStatusLabel->setText(tr("Two passwords are not the same!"));
+        return ui->passwordStatusLabel->setText(tr("Two passwords are not the same"));
     }
 
     // Update password
