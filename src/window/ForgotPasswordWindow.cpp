@@ -14,7 +14,7 @@ ForgotPasswordWindow::ForgotPasswordWindow(QWidget *parent) :
     ui(new Ui::ForgotPasswordWindow) {
     ui->setupUi(this);
 
-    setWindowTitle("BudgetWise Forgot Passowrd");
+    setWindowTitle("Forgot Passowrd - BudgetWise");
 
     // Click events
     connect(ui->resetPassword, SIGNAL(clicked()), this, SLOT(resetPassword()));

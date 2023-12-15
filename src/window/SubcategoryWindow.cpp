@@ -26,7 +26,7 @@ SubcategoryWindow::SubcategoryWindow(QWidget *parent) :
     updateSubcategoryDialog->setModal(true);
 
     // Title
-    setWindowTitle("Subcategory Management");
+    setWindowTitle("Subcategory Management - BudgetWise");
 
     // Events
     connect(ui->addButton, &QPushButton::clicked, this, &SubcategoryWindow::onAddbuttonClicked);

@@ -13,6 +13,8 @@ SignUpWindow::SignUpWindow(QWidget *parent) :
     ui(new Ui::SignUpWindow) {
     ui->setupUi(this);
 
+    setWindowTitle("Sign Up - BudgetWise");
+
     // Connections
     connect(ui->createAccountButton, SIGNAL(clicked()), this, SLOT(signUp()));
     connect(ui->backButton, SIGNAL(clicked()), this, SLOT(back()));

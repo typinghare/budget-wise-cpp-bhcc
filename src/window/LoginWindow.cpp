@@ -15,7 +15,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow) {
     ui->setupUi(this);
 
-    setWindowTitle("BudgetWise Login");
+    setWindowTitle("Login - BudgetWise");
 
     // Click events
     connect(ui->loginButton, SIGNAL(clicked()), this, SLOT(login()));

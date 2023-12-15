@@ -16,7 +16,7 @@ RecordsWindow::RecordsWindow(QWidget *parent):
     ui->setupUi(this);
 
     // Title
-    setWindowTitle("Records");
+    setWindowTitle("Records - BudgetWise");
 
     connect(ui->backButton, &QPushButton::clicked, this, &RecordsWindow::onBackButtonClicked);
 }
@@ -30,7 +30,7 @@ RecordsWindow::RecordsWindow(const QString &categoryName, QWidget *parent):
     if (category.isNull()) {
         categoryId = 0;
     } else {
-        setWindowTitle("Records of " + categoryName);
+        setWindowTitle("Transactions of " + categoryName);
         categoryId = category->getId();
     }
 
