@@ -28,30 +28,14 @@ QSharedPointer<Record> RecordService::createRecord(
 }
 
 bool RecordService::deleteLastRecord(unsigned int userId) {
-    // // Get the user's last record
-    // auto recordRepository = Database::getInstance()->getRecordRepository();
-    // QSharedPointer<Record> record(recordRepository.getLast(userId));
-    // if (record.isNull()) {
-    //     return false;
-    // }
+    // Get the user's last record
+    auto recordRepository = Database::getInstance()->getRecordRepository();
+    unsigned int lastRecordId = recordRepository.getLastId(userId);
+    if (lastRecordId == 0 ) {
+        return false;
+    }
 
-    // // Get the user's current balance
-    // auto userInfoRepository = Database::getInstance()->getUserInfoRepository();
-    // QSharedPointer<UserInfo> userInfo(userInfoRepository.getByUserId(userId));
-    // if (userInfo.isNull()) {
-    //     return false;
-    // }
-
-    // // Delete the record
-    // float amount = record->getAmount();
-    // bool removeRecordResult = recordRepository.remove(record->getId());
-    // if (!removeRecordResult) {
-    //     return false;
-    // }
-
-    // // Add the amount back to the balance; update the user info
-    // float newBalance = userInfo->getBalance() + amount;
-    // userInfoRepository.updateBalance(userId, newBalance);
+    recordRepository.remove(lastRecordId);
 
     return true;
 }

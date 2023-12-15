@@ -25,7 +25,9 @@ MainWindow::MainWindow(QWidget *parent):
 
     // [TEST]
     LocalUser::set(new User(1, "TypingHare", "9;>;9<<{pw|o}vI", "jamechan312.cn@gmail.com"));
-    // Dummy::makeDummyRecords();
+
+    // Create fake records for USER #1
+    Dummy::makeDummyRecords();
 
     // Set window title
     setWindowTitle("BudgetWise");
@@ -203,7 +205,7 @@ void MainWindow::onAddButtonClicked() {
 }
 
 void MainWindow::onDeleteLastButtonClicked() {
-    // Check if there is record
+    // Check if the record exists
     if (itemModel->rowCount() == 0) {
         return WindowUtil::createErrorMessageBox(this, "There are no transactions to delete!");
     }
@@ -220,6 +222,8 @@ void MainWindow::onDeleteLastButtonClicked() {
     if (!result) {
         WindowUtil::createErrorMessageBox(this, "Fail to delete the last transaction!");
     }
+
+    itemModel->removeRow(itemModel->rowCount() - 1);
 }
 
 void MainWindow::onViewButtonClicked() {
@@ -246,13 +250,6 @@ void MainWindow::onCreateConfirmed(unsigned int categoryId, unsigned int subcate
         bool confirmed = WindowUtil::createConfirmationBox(this, message);
         if (!confirmed) {
             return;
-        }
-
-        // Create
-        RecordService recordService;
-        auto record = recordService.createRecord(userId, categoryId, subcategoryId, amount);
-        if (record.isNull()) {
-            return WindowUtil::createErrorMessageBox(this, "Fail to create the record!");
         }
     } else {
         // Get the subcategory

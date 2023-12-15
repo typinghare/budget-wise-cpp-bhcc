@@ -9,6 +9,7 @@
 #include "src/windows.h"
 #include "src/Database.h"
 #include "src/LocalUser.h"
+#include "src/service/SubcategoryService.h"
 
 SubcategoryWindow::SubcategoryWindow(QWidget *parent) :
     QWidget(parent),
@@ -209,7 +210,8 @@ void SubcategoryWindow::onDeleteButtonClicked() {
         }
 
         // Remove the subcategory
-        subcategoryRepository.remove(subcategory->getId());
+        SubcategoryService subcategoryService;
+        subcategoryService.removeSubcategory(subcategory->getId());
     }
 
     // Remove the rows from the table view

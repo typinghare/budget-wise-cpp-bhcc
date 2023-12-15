@@ -24,10 +24,11 @@ private:
      */
     Database();
 
+public:
     /**
-     * @brief Initializes tables; creates tables if tables do not exist.
+     * @brief Returns an database instance (singleton).
      */
-    void createTables();
+    static Database* getInstance();
 
     /**
      * @brief Drops a table.
@@ -41,12 +42,6 @@ private:
      * @param sql The essential part of the sql statement (in the parenthesis).
      */
     void createTable(const QString& tableName, const QString& sql);
-
-public:
-    /**
-     * @brief Returns an database instance (singleton).
-     */
-    static Database* getInstance();
 
 public:
     ~Database();
@@ -76,6 +71,11 @@ public:
      * @return
      */
     RecordRepository getRecordRepository();
+
+    /**
+     * @brief Initializes tables; creates tables if tables do not exist.
+     */
+    void createTables();
 
 private:
     QSqlDatabase db;

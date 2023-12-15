@@ -183,6 +183,16 @@ void ViewWindow::plotWithSubcategory(unsigned int subcategoryId) {
 }
 
 void ViewWindow::createChart(QList<Record*> recordList) {
+    if (recordList.size() > 8) {
+        QList<Record*> lastEightRecords;
+        for (int i = recordList.size() - 8; i < recordList.size(); ++i) {
+            lastEightRecords.append(recordList[i]);
+        }
+
+        recordList.clear();
+        recordList = lastEightRecords;
+    }
+
     // Hide the chart view
     chartView->hide();
 
