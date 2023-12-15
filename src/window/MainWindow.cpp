@@ -24,10 +24,10 @@ MainWindow::MainWindow(QWidget *parent):
     Database::getInstance();
 
     // [TEST]
-    LocalUser::set(new User(1, "TypingHare", "9;>;9<<{pw|o}vI", "jamechan312.cn@gmail.com"));
+    // LocalUser::set(new User(1, "TypingHare", "9;>;9<<{pw|o}vI", "jamechan312.cn@gmail.com"));
 
     // Create fake records for USER #1
-    Dummy::makeDummyRecords();
+    // Dummy::makeDummyRecords();
 
     // Set window title
     setWindowTitle("BudgetWise");
@@ -197,7 +197,7 @@ void MainWindow::logout() {
 void MainWindow::onAddButtonClicked() {
     createRecordWindow->refreshCategories();
     if (createRecordWindow->getCategoryCount() == 0) {
-        return WindowUtil::createErrorMessageBox(this, "You don't have a subcategory yet!");
+        return WindowUtil::createErrorMessageBox(this, "You don't have a category yet!");
     }
 
     createRecordDialog->setWindowTitle("Create Transaction");
@@ -224,6 +224,8 @@ void MainWindow::onDeleteLastButtonClicked() {
     }
 
     itemModel->removeRow(itemModel->rowCount() - 1);
+    QString balance = itemModel->item(itemModel->rowCount() - 1, 4)->data(Qt::DisplayRole).toString();
+    setBalance(balance.toDouble());
 }
 
 void MainWindow::onViewButtonClicked() {

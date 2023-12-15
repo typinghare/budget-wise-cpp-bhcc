@@ -91,7 +91,7 @@ void CreateRecordWindow::loadSubcategories(unsigned int categoryId) {
     subcategoryIdMap.clear();
 
     // (empty) - No subcategory
-    ui->subcategoryCombo->addItem("(empty)");
+    ui->subcategoryCombo->addItem("(not selected)");
     subcategoryIdMap[0] = 0;
 
     auto subcategoryRepository = Database::getInstance()->getSubcategoryRepository();

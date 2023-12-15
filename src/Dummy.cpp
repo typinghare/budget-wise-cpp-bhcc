@@ -22,7 +22,7 @@ void Dummy::makeDummyRecords() {
 
     // Categories
     categoryRepository.create(1, "Housing");        // 1
-    categoryRepository.create(1, "Automobile");     // 2
+    categoryRepository.create(1, "Online");         // 2
     categoryRepository.create(1, "Pay");            // 3
     categoryRepository.create(1, "Income");         // 4
 

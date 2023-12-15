@@ -1,5 +1,7 @@
 # Changelog
 
+> Changelogs are written and maintained by James Chan. **Grammarly** is used to correct grammatical problems, and **ChatGPT** is used to improve sentences. 
+
 ## Nov 27  to Dec 3
 
 * Established the foundational framework and directory structure for the application, providing a robust and organized foundation.
@@ -23,4 +25,9 @@
 
 ## Dec 12 to Dec 14
 
-* 
+* Introducing the Records Window, a user-friendly interface that showcases all records within a specific category. This addition empowers users with enhanced control over their transactions.
+* Implemented a logout function accessible via the menu bar. Users can seamlessly log out with a simple click, ensuring a secure and convenient experience.
+* Resolved issues related to signing up and resetting password procedures, enhancing the overall reliability and smooth functioning of the application.
+* Unveiling the View Window, offering users an insightful visual representation of their data through interactive charts. Users can apply filters to explore specific categories and subcategories, enabling a more detailed analysis.
+* Streamlined data management by implementing a feature that automatically deletes subcategories when their parent category is removed. Additionally, associated records will be seamlessly deleted when deleting the corresponding category or subcategory, ensuring a tidy and efficient data structure.
+* Users now have the flexibility to create transactions without the constraint of selecting a category.

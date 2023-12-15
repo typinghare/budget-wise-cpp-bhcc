@@ -63,8 +63,6 @@ void LoginWindow::login() {
         return ui->passwordStatusLabel->setText("Incorrect password");
     }
 
-    qDebug() << "Login user ID: " << user->getId();
-
     // Set local user
     LocalUser::set(new User(user->getId(), user->getUsername(), user->getAuthString(), user->getEmail()));
 

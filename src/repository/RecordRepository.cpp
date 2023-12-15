@@ -26,7 +26,7 @@ Record* RecordRepository::get(unsigned int id) {
     return new Record(id, userId, categoryId, subcategoryId, createdAt, amount, 0.0);
 }
 
-QList<Record*> RecordRepository::getAll(unsigned int userId, bool desc) {
+QList<Record*> RecordRepository::getAllByUser(unsigned int userId, bool desc) {
     QList<Record*> list;
 
     QSqlQuery query;

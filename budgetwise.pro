@@ -33,7 +33,6 @@ SOURCES += \
     src/util/FileUtil.cpp \
     src/util/PasswordUtil.cpp \
     src/util/WindowUtil.cpp \
-    src/common/Date.cpp \
     src/Database.cpp \
     src/LocalUser.cpp \
     src/window/UpdateSubcategoryWindow.cpp \
@@ -71,7 +70,6 @@ HEADERS += \
     src/util/FileUtil.h \
     src/util/PasswordUtil.h \
     src/util/WindowUtil.h \
-    src/common/Date.h \
     src/Database.h \
     src/LocalUser.h \
     src/utils.h \

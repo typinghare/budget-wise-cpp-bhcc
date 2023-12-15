@@ -46,4 +46,5 @@ void UpdateSubcategoryWindow::onOkButtonClicked() {
 
 void UpdateSubcategoryWindow::onCancelButtonClicked() {
     setSubcategoryName("");
+    emit confirmed("", "");
 }

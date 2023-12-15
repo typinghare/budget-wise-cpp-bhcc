@@ -49,14 +49,12 @@ void RecordsWindow::displayRecords() {
 
     ui->recordTable->setModel(itemModel);
 
-    qDebug() << categoryId;
-
     // Load records
     double total = 0.0;
     if (categoryId != 0) {
         auto recordRepository = Database::getInstance()->getRecordRepository();
         auto subcategoryRespository = Database::getInstance()->getSubcategoryRepository();
-        auto recordList = recordRepository.getAll(categoryId, true);
+        auto recordList = recordRepository.getAllByCategory(categoryId, false);
         for (auto &record : recordList) {
             QDateTime createdAt = record->getCreatedAt();
             unsigned int subcategoryId = record->getSubcategoryId();

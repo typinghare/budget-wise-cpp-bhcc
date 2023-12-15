@@ -18,7 +18,7 @@ public:
      * @param userId The ID of the user.
      * @return A list of record entity pointers.
      */
-    QList<Record*> getAll(unsigned int userId, bool desc);
+    QList<Record*> getAllByUser(unsigned int userId, bool desc);
 
     /**
      * @brief Retrives all records of a specific category.

@@ -255,23 +255,6 @@ void CategoryWindow::showStatusMessage(const QString& message, const QString& co
 
 void CategoryWindow::onTableDoubleClicked(const QModelIndex &index) {
     onManageCategoriesButtonClicked();
-    // if (!index.isValid()) {
-    //     return;
-    // }
-
-    // int rowIndex = index.row();
-    // if (rowIndex < 0) {
-    //     return;
-    // }
-
-    // // Check category name
-    // auto categoryName = itemModel->item(rowIndex, 0)->data(Qt::DisplayRole).toString();
-    // if (categoryName == "") {
-    //     return;
-    // }
-
-    // // Jump to the subcategory window
-    // WindowUtil::jump(this, new SubcategoryWindow(categoryName));
 }
 
 void CategoryWindow::onManageCategoriesButtonClicked() {

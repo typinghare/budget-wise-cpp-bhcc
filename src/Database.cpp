@@ -54,12 +54,6 @@ Database::Database() {
 }
 
 void Database::createTables() {
-    // dropTable("user");
-    // dropTable("user_info");
-    // dropTable("category");
-    // dropTable("subcategory");
-    // dropTable("record");
-
     createTable(
         "user",
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -101,7 +95,6 @@ void Database::createTables() {
 
     // Create a view
     QSqlQuery query;
-    query.exec("DROP VIEW IF EXISTS record_with_balance;");
     QString recordWithBalanceSql(
         "CREATE VIEW IF NOT EXISTS record_with_balance AS "
         "SELECT t.*, "

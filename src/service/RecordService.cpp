@@ -9,7 +9,7 @@ RecordService::RecordService() {
 
 QList<Record*> RecordService::getAllRecords(unsigned int userId, bool desc) {
     auto recordRepository = Database::getInstance()->getRecordRepository();
-    return recordRepository.getAll(userId, desc);
+    return recordRepository.getAllByUser(userId, desc);
 }
 
 QSharedPointer<Record> RecordService::createRecord(

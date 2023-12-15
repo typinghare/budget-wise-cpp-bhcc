@@ -167,7 +167,7 @@ void ViewWindow::plot() {
     // Get the records
     auto userId = LocalUser::get()->getId();
     auto recordRepository = Database::getInstance()->getRecordRepository();
-    createChart(recordRepository.getAll(userId, false));
+    createChart(recordRepository.getAllByUser(userId, false));
 }
 
 void ViewWindow::plotWithCategory(unsigned int categoryId) {
@@ -201,9 +201,9 @@ void ViewWindow::createChart(QList<Record*> recordList) {
         return;
     }
 
-    // Prepare maps
-    QMap<int, int> valueMap;
+    // Prepare date string list
     QStringList dateStringList;
+    QMap<int, int> valueMap;
     for (int index = 0; index < recordList.size(); ++index) {
         Record* record = recordList[index];
         valueMap[index] = record->getAmount();
@@ -225,7 +225,6 @@ void ViewWindow::createChart(QList<Record*> recordList) {
     axisX->clear();
     axisX->append(dateStringList);
     axisX->setRange(dateStringList.first(), dateStringList.last());
-    qDebug() << minAmount << maxAmount;
     axisY->setRange(minAmount, maxAmount);
 
     // Set series

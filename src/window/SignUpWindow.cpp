@@ -65,14 +65,6 @@ void SignUpWindow::signUp() {
         return;
     }
 
-    // Create user info
-    // auto userInfoRepository = Database::getInstance()->getUserInfoRepository();
-    // QSharedPointer<UserInfo> userInfo(userInfoRepository.create(newUser->getId()));
-    // if (userInfo.isNull()) {
-    //     qDebug() << "Fail to sign up (fail to create user info).";
-    //     return;
-    // }
-
     qDebug() << "Created user: " << newUser->getId();
     QMessageBox::information(this, "Success", "You created an account successfully!");
 
